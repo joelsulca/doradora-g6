@@ -1,0 +1,38 @@
+
+.section-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #050505;
+    font-weight: bold;
+}
+
+.icon {
+    font-size: 3rem;
+    color: #c2a41d;
+}
+
+.card {
+    background-color: none;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    background-color: #050505;
+    color: #c2a41d;
+    box-shadow: 0px 0px 100px gold;
+}
+
+.contact-btn {
+    background-color: #1a2a6c;
+    color: rgb(14, 13, 13);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.contact-btn:hover {
+    background-color: #16275b;
+    color: rgb(15, 15, 15);
+}

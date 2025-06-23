@@ -1,0 +1,74 @@
+/* Estilos generales del navbar */
+.navbar {
+    background: rgb(153, 23, 23);
+    padding: 20px 0;
+  }
+  
+  /* Asegura que el navbar esté alineado al centro verticalmente */
+  .navbar-nav {
+    align-items: center;
+  }
+  
+  /* Estilos para los enlaces del menú */
+  .navbar-nav .nav-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-nav .nav-link {
+    color: white !important; /* Letras en blanco */
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7); /* Borde blanco */
+    transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-size: 20px;
+  }
+  
+  /* Hover en los enlaces */
+  .navbar-nav .nav-link:hover {
+    color: #f1c40f !important; /* Cambia a dorado */
+    text-shadow: 1px 1px 4px rgba(255, 215, 0, 0.9); /* Borde dorado al pasar el mouse */
+  }
+  
+  /* Íconos blancos con borde */
+  .icon-btn i {
+    color: white;
+    font-size: 30px;
+    margin-left: 15px;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7); /* Borde blanco */
+    transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  /* Hover en los íconos */
+  .icon-btn:hover i {
+    color: #f1c40f; /* Íconos dorados al pasar el mouse */
+    text-shadow: 1px 1px 4px rgba(255, 215, 0, 0.9); /* Borde dorado al pasar el mouse */
+  }
+  
+  /* Logo con ajuste de tamaño */
+  .logo {
+    height: 55px; /* Ajusta según necesidad */
+    display: flex;
+    align-items: center;
+  }
+  
+
+@media (max-width: 576px) {
+
+}
+
+/* 📊 Tablets (máximo 768px) */
+@media (max-width: 768px) {
+
+}
+
+/* 💻 Laptops y Escritorios (mínimo 1024px) */
+@media (min-width: 1024px) {
+    
+}

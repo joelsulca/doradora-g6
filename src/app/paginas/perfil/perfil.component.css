@@ -1,0 +1,29 @@
+.profile-card {
+    background: #fff;
+    border-left: 5px solid #ffcc00;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-image img {
+    border: 3px solid #ffcc00;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table-dark th {
+    background: #333;
+    color: #fff;
+}
+
+.btn-danger {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-danger:hover {
+    background: #d9534f;
+}

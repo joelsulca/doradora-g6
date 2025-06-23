@@ -1,0 +1,71 @@
+/* Hace que el cuerpo ocupe toda la altura de la pantalla */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+  }
+  
+  /* Asegura que el contenido principal crezca y empuje el footer hacia abajo */
+  app-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ocupa toda la pantalla */
+  }
+  
+  /* Hace que el contenido crezca y el footer se mantenga al final */
+  router-outlet {
+    flex-grow: 1;
+  }
+  
+  /* Estilos del footer */
+  .footer {
+    background: black;
+    padding: 40px 0;
+    color: white;
+    text-align: center;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    width: 100%;
+    margin-top: auto; /* Empuja el footer hacia la parte inferior */
+  }
+  
+  #background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.45; /* Ajusta la transparencia */
+  }
+ 
+  .hero-section {
+    color: #050505;
+    padding-top: 20px;
+    height: 60px;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.text-gold {
+  color: #F8DF65;
+  font-weight: bold;
+}
+
+.btn-gold {
+  background-color: #F8DF65;
+  color: black;
+  font-weight: bold;
+  border: none;
+}
+
+.btn-gold:hover {
+  background-color: darkgoldenrod;
+}

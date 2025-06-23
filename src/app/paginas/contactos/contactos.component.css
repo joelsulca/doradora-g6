@@ -1,0 +1,18 @@
+.card {
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+.btn-warning {
+    background-color: #ffcc00 !important;
+    border: none;
+}
+
+.btn-warning:hover {
+    background-color: #ff9900 !important;
+}
+

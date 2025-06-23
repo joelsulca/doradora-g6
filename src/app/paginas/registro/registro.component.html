@@ -1,0 +1,112 @@
+<div class="hero-section">
+    <h1>Productos Detalle | LaDorada</h1>
+</div>
+<hr>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <form [formGroup]="registroForm" (ngSubmit)="registrarUsuario()">
+                        <div class="row">
+                            <!-- Columna 1 -->
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Usuario:</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        <input type="text" class="form-control" formControlName="username"
+                                            placeholder="Ingrese su usuario">
+                                    </div>
+                                    <div *ngIf="campoInvalido('username')" class="text-danger">El usuario debe tener al
+                                        menos 4 caracteres.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Contraseña:</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" formControlName="password"
+                                            placeholder="Ingrese su contraseña">
+                                    </div>
+                                    <div *ngIf="campoInvalido('password')" class="text-danger">La contraseña debe tener
+                                        al menos 6 caracteres.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Email:</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                        <input type="email" class="form-control" formControlName="email"
+                                            placeholder="Ingrese su correo">
+                                    </div>
+                                    <div *ngIf="campoInvalido('email')" class="text-danger">Debe ingresar un correo
+                                        válido.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Nombres:</label>
+                                    <input type="text" class="form-control" formControlName="nombres"
+                                        placeholder="Ingrese su nombre">
+                                    <div *ngIf="campoInvalido('nombres')" class="text-danger">Este campo es obligatorio.
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Apellidos:</label>
+                                    <input type="text" class="form-control" formControlName="apellidos"
+                                        placeholder="Ingrese su apellido">
+                                    <div *ngIf="campoInvalido('apellidos')" class="text-danger">Este campo es
+                                        obligatorio.</div>
+                                </div>
+                            </div>
+
+                            <!-- Columna 2 -->
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Dirección:</label>
+                                    <input type="text" class="form-control" formControlName="direccion"
+                                        placeholder="Ingrese su dirección">
+                                    <div *ngIf="campoInvalido('direccion')" class="text-danger">Este campo es
+                                        obligatorio.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Departamento:</label>
+                                    <select class="form-select" formControlName="departamento">
+                                        <option *ngFor="let dep of departamentos" [value]="dep">{{ dep }}</option>
+                                    </select>
+                                    <div *ngIf="campoInvalido('departamento')" class="text-danger">Debe seleccionar un
+                                        departamento.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Distrito:</label>
+                                    <select class="form-select" formControlName="distrito">
+                                        <option *ngFor="let dist of distritos" [value]="dist">{{ dist }}</option>
+                                    </select>
+                                    <div *ngIf="campoInvalido('distrito')" class="text-danger">Debe seleccionar un
+                                        distrito.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Referencia:</label>
+                                    <input type="text" class="form-control" formControlName="referencia"
+                                        placeholder="Referencia (opcional)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botón de Registro -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary w-100"
+                                [disabled]="!registroForm.valid">
+                                <i class="fas fa-user-plus"></i> Registrarse
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

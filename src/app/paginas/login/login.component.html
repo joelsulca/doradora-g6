@@ -1,0 +1,50 @@
+<div class="login-container shadow-lg p-4 rounded mt-4 mb-5"
+    style="max-width: 400px; margin: auto; background: white; ">
+    <h2 class="text-center mb-4">Iniciar Sesión</h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Usuario -->
+        <div class="mb-3 position-relative">
+            <label class="form-label">Usuario</label>
+            <div class="input-group">
+                <span class="input-group-text bg-light"><i class="fas fa-user"></i></span>
+                <input type="text" class="form-control" formControlName="username" placeholder="Ingrese su usuario">
+            </div>
+            <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="text-danger">
+                El usuario es obligatorio.
+            </div>
+        </div>
+
+        <!-- Contraseña -->
+        <div class="mb-3 position-relative">
+            <label class="form-label">Contraseña</label>
+            <div class="input-group">
+                <span class="input-group-text bg-light"><i class="fas fa-lock"></i></span>
+                <input type="password" class="form-control" formControlName="password"
+                    placeholder="Ingrese su contraseña">
+            </div>
+            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+                La contraseña es obligatoria.
+            </div>
+        </div>
+
+        <!-- Mensaje de error -->
+        <div class="text-danger" *ngIf="errorMessage">
+            {{ errorMessage }}
+        </div>
+
+        <!-- Botón Ingresar -->
+        <button type="submit" class="btn btn-warning w-100 mt-3 text-white">
+            <b>Ingresar</b>
+        </button>
+    </form>
+
+    <!-- Enlaces de ayuda -->
+    <div class="text-center mt-3">
+        <a class="link" style="cursor: pointer" routerLink="/registro" (click)="toggleAuthMode()"><b>¿No tienes cuenta?
+                Regístrate</b></a>
+        <br>
+        <a class="link" style="cursor: pointer" routerLink="/login" (click)="forgotPassword()"><b>¿Olvidaste tu
+                contraseña?</b></a>
+    </div>
+</div>

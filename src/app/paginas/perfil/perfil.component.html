@@ -1,0 +1,60 @@
+<!-- Sección Hero -->
+<div class="hero-section">
+    <h1 class="">Perfil | LaDorada</h1>
+</div>
+<hr>
+
+<div class="container my-5">
+    <div *ngIf="usuario" class="align-items-center row">
+        <!-- Imagen de perfil -->
+        <div class="profile-image col-md-3 text-center">
+            <img src="imgs/foto_perfil.webp" alt="Foto de perfil" class="rounded-circle" width="250" height="250">
+        </div>
+
+        <!-- Información Personal -->
+        <div class="profile-card shadow-lg rounded col-md">
+            <h4 class="text-gold">Información Personal</h4>
+            <p><strong>Usuario:</strong> {{ usuario.username }}</p>
+            <p><strong>Nombre:</strong> {{ usuario.nombres }} {{ usuario.apellidos }}</p>
+            <p><strong>Email:</strong> {{ usuario.email }}</p>
+            <p><strong>Dirección:</strong> {{ usuario.direccion }}</p>
+            <p><strong>Ubicación:</strong> {{ usuario.departamento }}, {{ usuario.provincia }}, {{ usuario.distrito }}</p>
+            <p><strong>Referencia:</strong> {{ usuario.referencia }}</p>
+            <p><strong>Rol:</strong> {{ usuario.role | uppercase }}</p>
+        </div>
+    </div>
+
+    <!-- Historial de Pedidos -->
+    <h4 class="mt-4">📦 Historial de Pedidos</h4>
+    <table class="table table-bordered text-dark">
+        <thead class="table-dark text-white">
+            <tr>
+                <th>Pedido #</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Factura</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pedido of pedidos">
+                <td>{{ pedido.id }}</td>
+                <td>{{ pedido.fecha }}</td>
+                <td>S/ {{ pedido.total.toFixed(2) }}</td>
+                <td>{{ pedido.estado }}</td>
+                <td>
+                    <a [href]="pedido.urlFactura" target="_blank" class="btn btn-primary btn-sm">📄 Ver Factura</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Botón de cerrar sesión -->
+    <div class="text-center">
+        <button class="btn btn-danger mt-3 px-4" (click)="cerrarSesion()">Cerrar Sesión</button>
+    </div>
+</div>
+
+<ng-template #noUser>
+    <p class="text-center text-white">No hay usuario autenticado.</p>
+</ng-template>

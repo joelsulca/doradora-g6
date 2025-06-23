@@ -1,0 +1,110 @@
+<!-- Sección Hero -->
+<div class="hero-section">
+    <h1>Contactanos | LaDorada</h1>
+</div>
+<hr>
+<div class="container my-5">
+    <div class="row">
+        <!-- Información de contacto -->
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card shadow p-3">
+                        <h4 class="card-title"><i class="fas fa-map-marker-alt text-danger"></i> Ubicación</h4>
+                        <p class="card-text">Urb. Baltazar Martínez de Compagñon Mz. H, Lote 9, San Martín</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow p-3">
+                        <h4 class="card-title"><i class="fas fa-clock text-primary"></i> Horarios</h4>
+                        <p><strong>LUN - SAB:</strong> 7 AM - 7 PM</p>
+                        <p><strong>DOMINGOS:</strong> 9 AM - 5 PM</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="card shadow p-3">
+                        <h4 class="card-title"><i class="fas fa-phone text-success"></i> Contacto</h4>
+                        <p><strong>Tel:</strong> (+51) 998 822 644 | (01) 446 – 2278</p>
+                        <p><strong>Email:</strong> contacto&#64;ladorada.com</p>
+                        <a href="#" class="text-decoration-none"><i class="fas fa-book text-warning"></i> Libro de Reclamaciones</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card p-3 text-center">
+                        <h4 class="card-title"><i class="fas fa-share-alt text-info"></i> Síguenos</h4>
+                        <div class="d-flex justify-content-center mt-2">
+                            <a href="#" class="m-2 text-primary"><i class="fab fa-facebook fa-2x"></i></a>
+                            <a href="#" class="m-2 text-danger"><i class="fab fa-instagram fa-2x"></i></a>
+                            <a href="#" class="m-2 text-info"><i class="fab fa-twitter fa-2x"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulario de Contacto -->
+        <div class="col-md-6">
+            <div class="card shadow p-4">
+                <h4 class="fw-bold text-center">📩 Envíanos un mensaje</h4>
+                <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+                    
+                    <!-- Nombre -->
+                    <div class="mb-3">
+                        <label class="form-label"><strong>Nombre Completo</strong></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            <input type="text" class="form-control" formControlName="name" placeholder="Ej: Juan Pérez">
+                        </div>
+                        <div class="text-danger" *ngIf="campoInvalido('name')">
+                            El nombre es obligatorio.
+                        </div>
+                    </div>
+
+                    <!-- Correo Electrónico -->
+                    <div class="mb-3">
+                        <label class="form-label"><strong>Correo Electrónico</strong></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            <input type="email" class="form-control" formControlName="email" placeholder="Ej: correo@ejemplo.com">
+                        </div>
+                        <div class="text-danger" *ngIf="campoInvalido('email')">
+                            Introduce un correo válido.
+                        </div>
+                    </div>
+
+                    <!-- Teléfono -->
+                    <div class="mb-3">
+                        <label class="form-label"><strong>Teléfono</strong></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                            <input type="text" class="form-control" formControlName="phone" placeholder="Ej: +51 999 999 999">
+                        </div>
+                        <div class="text-danger" *ngIf="campoInvalido('phone')">
+                            Introduce un número de teléfono válido.
+                        </div>
+                    </div>
+
+                    <!-- Mensaje -->
+                    <div class="mb-3">
+                        <label class="form-label"><strong>Mensaje</strong></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-comment-alt"></i></span>
+                            <textarea class="form-control" rows="4" formControlName="message" placeholder="Escribe tu mensaje aquí"></textarea>
+                        </div>
+                        <div class="text-danger" *ngIf="campoInvalido('message')">
+                            El mensaje es obligatorio.
+                        </div>
+                    </div>
+
+                    <!-- Botón Enviar -->
+                    <button type="submit" class="btn btn-warning w-100 mt-3 text-dark fw-bold" [disabled]="contactForm.invalid">
+                        <i class="fas fa-paper-plane"></i> Enviar Mensaje
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

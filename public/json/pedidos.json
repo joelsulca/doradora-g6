@@ -1,2 +1,103 @@
-[]
+[
+    {
+      "id": 101,
+      "usuario": "cliente1",
+      "fecha": "2024-03-05",
+      "total": 160.00,
+      "estado": "Entregado",
+      "metodoPago": "Tarjeta de Crédito",
+      "productos": [
+        { "nombre": "Filete de Paiche", "cantidad": 2, "total": 100.00 },
+        { "nombre": "Chorizo de Paiche", "cantidad": 1, "total": 40.00 },
+        { "nombre": "Ceviche de Paiche", "cantidad": 1, "total": 20.00 }
+      ]
+    },
+    {
+      "id": 102,
+      "usuario": "cliente1",
+      "fecha": "2024-03-10",
+      "total": 90.00,
+      "estado": "Pendiente",
+      "metodoPago": "Efectivo",
+      "productos": [
+        { "nombre": "Paiche Ahumado", "cantidad": 1, "total": 65.00 },
+        { "nombre": "Paiche en Trozos", "cantidad": 1, "total": 25.00 }
+      ]
+    },
+    {
+      "id": 103,
+      "usuario": "cliente2",
+      "fecha": "2024-02-28",
+      "total": 135.00,
+      "estado": "Entregado",
+      "metodoPago": "PayPal",
+      "productos": [
+        { "nombre": "Paiche Marinado", "cantidad": 1, "total": 55.00 },
+        { "nombre": "Croquetas de Paiche", "cantidad": 2, "total": 80.00 }
+      ]
+    },
+    {
+      "id": 104,
+      "usuario": "cliente2",
+      "fecha": "2024-03-12",
+      "total": 95.00,
+      "estado": "En Proceso",
+      "metodoPago": "Transferencia Bancaria",
+      "productos": [
+        { "nombre": "Paiche en Conserva", "cantidad": 1, "total": 35.00 },
+        { "nombre": "Hamburguesas de Paiche", "cantidad": 2, "total": 60.00 }
+      ]
+    },
+    {
+      "id": 105,
+      "usuario": "cliente3",
+      "fecha": "2024-03-02",
+      "total": 120.00,
+      "estado": "Entregado",
+      "metodoPago": "Tarjeta de Débito",
+      "productos": [
+        { "nombre": "Paiche Ahumado", "cantidad": 1, "total": 65.00 },
+        { "nombre": "Paiche en Trozos", "cantidad": 1, "total": 45.00 },
+        { "nombre": "Chorizo de Paiche", "cantidad": 1, "total": 10.00 }
+      ]
+    },
+    {
+      "id": 106,
+      "usuario": "cliente3",
+      "fecha": "2024-03-08",
+      "total": 200.00,
+      "estado": "Pendiente",
+      "metodoPago": "Efectivo",
+      "productos": [
+        { "nombre": "Filete de Paiche", "cantidad": 2, "total": 100.00 },
+        { "nombre": "Paiche en Conserva", "cantidad": 2, "total": 70.00 },
+        { "nombre": "Paiche al Vacío", "cantidad": 1, "total": 30.00 }
+      ]
+    },
+    {
+      "id": 107,
+      "usuario": "cliente4",
+      "fecha": "2024-03-06",
+      "total": 150.00,
+      "estado": "Entregado",
+      "metodoPago": "Tarjeta de Crédito",
+      "productos": [
+        { "nombre": "Paiche Ahumado", "cantidad": 1, "total": 65.00 },
+        { "nombre": "Paiche Marinado", "cantidad": 1, "total": 55.00 },
+        { "nombre": "Hamburguesas de Paiche", "cantidad": 1, "total": 30.00 }
+      ]
+    },
+    {
+      "id": 108,
+      "usuario": "cliente4",
+      "fecha": "2024-03-09",
+      "total": 95.00,
+      "estado": "En Proceso",
+      "metodoPago": "PayPal",
+      "productos": [
+        { "nombre": "Ceviche de Paiche", "cantidad": 1, "total": 55.00 },
+        { "nombre": "Croquetas de Paiche", "cantidad": 2, "total": 40.00 }
+      ]
+    }
+  ]
   

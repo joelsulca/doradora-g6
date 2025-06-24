@@ -1,0 +1,18 @@
+.text-gold {
+    color: gold;
+}
+
+.text-white {
+    color: white;
+}
+
+.btn-gold {
+    background-color: gold;
+    color: black;
+    font-weight: bold;
+    border: none;
+}
+
+.btn-gold:hover {
+    background-color: darkgoldenrod;
+}

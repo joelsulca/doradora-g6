@@ -1,0 +1,20 @@
+[
+    {
+      "codigo": "DESCUENTO_10%",
+      "tipo": "porcentaje",
+      "descuento": 10,
+      "activo": true
+    },
+    {
+      "codigo": "SUPER50",
+      "tipo": "fijo",
+      "descuento": 50,
+      "activo": true
+    },
+    {
+      "codigo": "EXPIRED20",
+      "tipo": "porcentaje",
+      "descuento": 20,
+      "activo": false
+    }
+  ]

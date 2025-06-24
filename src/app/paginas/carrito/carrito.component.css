@@ -1,0 +1,61 @@
+.text-gold {
+    color: gold;
+    font-weight: bold;
+}
+
+.text-white {
+    color: white;
+}
+
+.btn-gold {
+    background-color: gold;
+    color: black;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.btn-gold:hover {
+    background-color: darkgoldenrod;
+}
+
+/* Ajuste de la imagen en el carrito */
+.img-carrito {
+    width: 60px; /* Ajustar el tamaño para una mejor visualización */
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Ajuste del botón de cantidad */
+.btn-sm {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+/* Alinear la cantidad al centro */
+td.text-center {
+    vertical-align: middle;
+}
+
+/* Ajustar el diseño de la tabla */
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #ddd !important;
+    padding: 15px;
+}
+
+/* Ajustar la fila de Total */
+h4.text-black {
+    font-size: 22px;
+}
+
+
+.display_inlene *{
+    display: inline;
+}

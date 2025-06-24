@@ -1,0 +1,21 @@
+<!-- Sección Hero -->
+<div class="hero-section">
+    <h1>Productos | LaDorada</h1>
+</div>
+<hr>
+<div class="container my-5">
+
+    <div class="row">
+        <div class="col-md-4" *ngFor="let producto of productos">
+            <div class="card product-card">
+                <img [src]="producto.imagen" class="card-img-top" alt="{{ producto.nombre }}">
+                <div class="card-body">
+                    <h5 class="card-title"><u>{{ producto.nombre }}</u></h5>
+                    <p class="card-text">{{ producto.descripcion_corta }}</p>
+                    <p class=""><strong>Precio:</strong> S/ {{ producto.precio.toFixed(2) }} por kg</p>
+                    <button class="btn btn-gold w-100" (click)="verDetalle(producto)">Ver Detalle</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

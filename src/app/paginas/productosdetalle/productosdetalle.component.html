@@ -1,0 +1,30 @@
+<!-- Sección Hero -->
+<div class="hero-section">
+    <h1>Productos Detalle | LaDorada</h1>
+</div>
+<hr>
+<div class="container my-5 p-5 bg-dark" *ngIf="producto">
+    <div class="row">
+        <!-- Imagen del Producto -->
+        <div class="col-md-6">
+            <img [src]="producto.imagen" class="img-fluid rounded">
+        </div>
+
+        <!-- Información del Producto -->
+        <div class="col-md-6">
+            <h2 class="text-gold">{{ producto.nombre }}</h2>
+            <p class="text-white"><strong>Categoría:</strong> {{ producto.categoria }}</p>
+            <p class="text-white"><strong>Marca:</strong> {{ producto.marca }}</p>
+            <p class="text-white"><strong>Descripción:</strong> {{ producto.descripcion_larga }}</p>
+            <p class="text-white"><strong>Precio:</strong> S/ {{ producto.precio.toFixed(2) }} por kg</p>
+            <img class="img-fluid" src="imgs/certificaciones.jpg">
+            <!-- Botón para agregar al carrito -->
+            <button class="btn btn-gold w-100 mt-3" (click)="agregarAlCarrito()">Agregar al Carrito</button>
+        </div>
+    </div>
+</div>
+
+<!-- Si el producto no se encuentra -->
+<div *ngIf="!producto" class="text-center text-white my-5 p-5 bg-dark">
+    <h3>Producto no encontrado</h3>
+</div>

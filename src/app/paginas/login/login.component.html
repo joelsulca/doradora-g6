@@ -3,15 +3,16 @@
     <h2 class="text-center mb-4">Iniciar Sesión</h2>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <!-- Usuario -->
+        <!-- Email -->
         <div class="mb-3 position-relative">
-            <label class="form-label">Usuario</label>
+            <label class="form-label">Correo Electrónico</label>
             <div class="input-group">
-                <span class="input-group-text bg-light"><i class="fas fa-user"></i></span>
-                <input type="text" class="form-control" formControlName="username" placeholder="Ingrese su usuario">
+                <span class="input-group-text bg-light"><i class="fas fa-envelope"></i></span>
+                <input type="email" class="form-control" formControlName="username" placeholder="Ingrese su correo electrónico">
             </div>
             <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="text-danger">
-                El usuario es obligatorio.
+                <span *ngIf="loginForm.get('username')?.errors?.['required']">El correo electrónico es obligatorio.</span>
+                <span *ngIf="loginForm.get('username')?.errors?.['email']">Ingrese un correo electrónico válido.</span>
             </div>
         </div>
 
@@ -25,6 +26,21 @@
             </div>
             <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
                 La contraseña es obligatoria.
+            </div>
+        </div>
+
+        <!-- Captcha -->
+        <div class="mb-3 position-relative">
+            <label class="form-label">Captcha</label>
+            <div class="input-group">
+                <span class="input-group-text bg-light"><i class="fas fa-shield-alt"></i></span>
+                <input type="text" class="form-control" formControlName="captcha" placeholder="Responde: {{ captchaPregunta }}">
+                <button type="button" class="btn btn-outline-secondary" (click)="generarCaptcha()" title="Nuevo captcha">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div *ngIf="loginForm.get('captcha')?.invalid && loginForm.get('captcha')?.touched" class="text-danger">
+                El captcha es obligatorio.
             </div>
         </div>
 

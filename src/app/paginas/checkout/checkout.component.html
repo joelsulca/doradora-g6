@@ -10,34 +10,52 @@
             <div class="col-md-6 p-3">
                 <h4 class="">📍 Datos de Envío</h4>
                 <div class="mb-3 position-relative">
-                    <label class="form-label">Nombre y Apellido</label>
+                    <label class="form-label">Nombre y Apellido (*)</label>
                     <div class="input-group">
                         <span class="input-group-text bg-light"><i class="fas fa-user"></i></span>
                         <input type="text" class="form-control" formControlName="nombre">
                     </div>
+                    <div class="text-danger" *ngIf="campoInvalido('nombre')">
+                        El nombre y apellido es obligatorio.
+                    </div>
                 </div>
                 <div class="mb-3 position-relative">
-                    <label class="form-label">Dirección</label>
+                    <label class="form-label">Dirección (*)</label>
                     <div class="input-group">
                         <span class="input-group-text bg-light"><i class="fas fa-map-marker-alt"></i></span>
                         <input type="text" class="form-control" formControlName="direccion">
                     </div>
+                    <div class="text-danger" *ngIf="campoInvalido('direccion')">
+                        La dirección es obligatoria.
+                    </div>
                 </div>
                 <div class="mb-3 position-relative">
-                    <label class="form-label">Departamento</label>
+                    <label class="form-label">Departamento (*)</label>
                     <input type="text" class="form-control" formControlName="departamento">
+                    <div class="text-danger" *ngIf="campoInvalido('departamento')">
+                        El departamento es obligatorio.
+                    </div>
                 </div>
                 <div class="mb-3 position-relative">
-                    <label class="form-label">Provincia</label>
+                    <label class="form-label">Provincia (*)</label>
                     <input type="text" class="form-control" formControlName="provincia">
+                    <div class="text-danger" *ngIf="campoInvalido('provincia')">
+                        La provincia es obligatoria.
+                    </div>
                 </div>
                 <div class="mb-3 position-relative">
-                    <label class="form-label">Distrito</label>
+                    <label class="form-label">Distrito (*)</label>
                     <input type="text" class="form-control" formControlName="distrito">
+                    <div class="text-danger" *ngIf="campoInvalido('distrito')">
+                        El distrito es obligatorio.
+                    </div>
                 </div>
                 <div class="mb-3 position-relative">
-                    <label class="form-label">Referencia</label>
+                    <label class="form-label">Referencia (*)</label>
                     <input type="text" class="form-control" formControlName="referencia">
+                    <div class="text-danger" *ngIf="campoInvalido('referencia')">
+                        La referencia es obligatoria.
+                    </div>
                 </div>
                 <!-- Sección de Programación de Envío -->
                 <div class="mb-3 position-relative">
@@ -64,19 +82,30 @@
                     <input type="radio" [value]="metodo" formControlName="metodoPago"
                         (change)="seleccionarMetodo(metodo)"> {{ metodo }}
                 </div>
+                <div *ngIf="campoInvalido('metodoPago')" class="text-danger mb-2">
+                    Debes seleccionar un método de pago.
+                </div>
                 <div *ngIf="metodoSeleccionado === 'Efectivo'" class="mt-3 p-2 text-center">
                     <h5 class="">📲 Pago con QR (Plin / Yape)</h5>
                     <img src="imgs/QR.png" alt="QR Pago" class="qr-img mt-3" width="200">
                     <p>Escanea el código QR para realizar el pago.</p>
                 </div>
-                <div *ngIf="metodoSeleccionado === 'Tarjeta de Crédito'" class="mt-3">
-                    <h5 class="">💳 Ingresa los Datos de tu Tarjeta</h5>
-                    <label class="form-label">Número de Tarjeta</label>
+                <div *ngIf="metodoSeleccionado === 'Tarjeta de Crédito'">
+                    <label class="form-label mt-3">Número de Tarjeta</label>
                     <input type="text" class="form-control" formControlName="tarjeta" placeholder="1234 5678 9012 3456">
+                    <div class="text-danger" *ngIf="campoInvalido('tarjeta')">
+                        El número de tarjeta es obligatorio.
+                    </div>
                     <label class="form-label mt-3">Fecha de Expiración</label>
                     <input type="text" class="form-control" formControlName="expiracion" placeholder="MM/YY">
+                    <div class="text-danger" *ngIf="campoInvalido('expiracion')">
+                        La fecha de expiración es obligatoria.
+                    </div>
                     <label class="form-label mt-3">CVV</label>
                     <input type="text" class="form-control w-25" formControlName="cvv" placeholder="123">
+                    <div class="text-danger" *ngIf="campoInvalido('cvv')">
+                        El CVV es obligatorio.
+                    </div>
                 </div>
                 <div *ngIf="metodoSeleccionado === 'Transferencia Bancaria'" class="mt-3">
                     <h5 class="">🏦 Datos Bancarios</h5>
@@ -96,7 +125,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let producto of carrito">
-                            <td>{{ producto.nombre }}</td>
+                            <td>{{ producto.nombreProducto }}</td>
                             <td class="text-center">{{ producto.cantidad }}</td>
                             <td class="text-end">S/ {{ (producto.precio * producto.cantidad).toFixed(2) }}</td>
                         </tr>

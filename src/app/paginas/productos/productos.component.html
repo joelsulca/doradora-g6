@@ -4,15 +4,14 @@
 </div>
 <hr>
 <div class="container my-5">
-
     <div class="row">
         <div class="col-md-4" *ngFor="let producto of productos">
             <div class="card product-card">
-                <img [src]="producto.imagen" class="card-img-top" alt="{{ producto.nombre }}">
+                <img [src]="getImagenUrl(producto.imagenPrincipalUrl)" class="card-img-top" alt="{{ producto.nombreProducto }}">
                 <div class="card-body">
-                    <h5 class="card-title"><u>{{ producto.nombre }}</u></h5>
-                    <p class="card-text">{{ producto.descripcion_corta }}</p>
-                    <p class=""><strong>Precio:</strong> S/ {{ producto.precio.toFixed(2) }} por kg</p>
+                    <h5 class="card-title"><u>{{ producto.nombreProducto }}</u></h5>
+                    <p class="card-text">{{ producto.descripcionCorta }}</p>
+                    <p class=""><strong>Precio:</strong> S/ {{ producto.precio.toFixed(2) }}</p>
                     <button class="btn btn-gold w-100" (click)="verDetalle(producto)">Ver Detalle</button>
                 </div>
             </div>

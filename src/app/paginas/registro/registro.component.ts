@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Usuario } from '../../clasess/usuario';
 import { Router } from '@angular/router';
+import { RegistroService } from '../../shared/services/registro.service';
+import { UsuarioRegistroPayload } from '../../shared/interfaces/usuario-registro.interface';
 
 @Component({
   selector: 'app-registro',
@@ -24,29 +25,33 @@ export class RegistroComponent implements OnInit {
     'Ancash': ['Huaraz', 'Carhuaz', 'Yungay', 'Chimbote']
   };
   distritos: string[] = [];
-  formularioValido = false; // Variable para controlar el estado del botón
+  formularioValido = false;
+  mensaje: string = '';
+  error: string = '';
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private registroService: RegistroService
   ) { }
 
   ngOnInit(): void {
     this.registroForm = this.fb.group(
       {
-        username: ['', [Validators.required, Validators.minLength(4)]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         email: ['', [Validators.required, Validators.email]],
         nombres: ['', Validators.required],
         apellidos: ['', Validators.required],
         direccion: ['', Validators.required],
         departamento: ['', Validators.required],
-        //provincia: ['', Validators.required],
         distrito: ['', Validators.required],
         referencia: [''],
-        role: ['cliente']
+        telefono: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
+        fechaNacimiento: ['', Validators.required],
+        aceptaTerminos: [false, Validators.requiredTrue]
+        // role: ['cliente']
       },
-      { updateOn: 'blur' } // ✅ Se validará cuando el usuario salga del campo
+      { updateOn: 'blur' }
     );
 
     this.registroForm.valueChanges.subscribe(() => {
@@ -59,25 +64,45 @@ export class RegistroComponent implements OnInit {
     });
   }
 
-
   registrarUsuario(): void {
+    this.mensaje = '';
+    this.error = '';
     if (this.registroForm.invalid) {
       this.registroForm.markAllAsTouched();
-      this.registroForm.updateValueAndValidity(); // 🔹 Forzar actualización de validación
+      this.registroForm.updateValueAndValidity();
       return;
     }
 
-    const nuevoUsuario: Usuario = this.registroForm.value;
-    console.log('Usuario registrado:', nuevoUsuario);
-    alert('Registro exitoso');
+    const form = this.registroForm.value;
+    const payload: UsuarioRegistroPayload = {
+      nombre: form.nombres,
+      apellido: form.apellidos,
+      correoElectronico: form.email,
+      password: form.password,
+      telefono: form.telefono,
+      fechaNacimiento: form.fechaNacimiento,
+      direccion: form.direccion,
+      activo: true,
+      correoConfirmado: true,
+      referencia: form.referencia,
+      rolId: 2
+    };
 
-    this.registroForm.reset();
-    this.formularioValido = false; // 🔹 Resetear la variable para deshabilitar el botón después del registro
-    // ✅ Guardamos el usuario en localStorage para auto-logueo
-    localStorage.setItem('user', JSON.stringify(nuevoUsuario));
-
-    // ✅ Redirigir al perfil después de registrarse
-    this.router.navigate(['/perfil']);
+    this.registroService.registrarUsuario(payload).subscribe({
+      next: (response) => {
+        if (response.statusCode === 200) {
+          this.mensaje = response.mensaje || 'Registro exitoso';
+          this.registroForm.reset();
+          this.formularioValido = false;
+          setTimeout(() => this.router.navigate(['/login']), 1500);
+        } else {
+          this.error = response.mensaje || 'Error en el registro';
+        }
+      },
+      error: (err) => {
+        this.error = err?.error?.mensaje || 'Error de conexión o datos inválidos';
+      }
+    });
   }
 
   campoInvalido(campo: string): boolean {

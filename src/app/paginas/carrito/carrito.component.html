@@ -20,7 +20,7 @@
                 <tr *ngFor="let producto of carrito" class="text-center">
                     <td class="align-items-start">
                         <img [src]="producto.imagen" class="img-carrito me-3 rounded">
-                        <span class="fw-bold">{{ producto.nombre }}</span>
+                        <span class="fw-bold">{{ producto.nombreProducto }}</span>
                     </td>
                     <td >S/ {{ producto.precio.toFixed(2) }}</td>
                     <td class="text-center display_inlene">
@@ -31,7 +31,7 @@
                     <td class="fw-bold">S/ {{ (producto.precio * producto.cantidad).toFixed(2) }}</td>
                     <td class="align-items-center">
                         <button class="btn btn-sm btn-danger d-flex align-items-center justify-content-center" 
-                            (click)="eliminarDelCarrito(producto.id)">
+                            (click)="eliminarDelCarrito(producto.productoId)">
                             🗑
                         </button>
                     </td>

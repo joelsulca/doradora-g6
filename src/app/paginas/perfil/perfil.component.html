@@ -14,13 +14,9 @@
         <!-- Información Personal -->
         <div class="profile-card shadow-lg rounded col-md">
             <h4 class="text-gold">Información Personal</h4>
-            <p><strong>Usuario:</strong> {{ usuario.username }}</p>
-            <p><strong>Nombre:</strong> {{ usuario.nombres }} {{ usuario.apellidos }}</p>
-            <p><strong>Email:</strong> {{ usuario.email }}</p>
-            <p><strong>Dirección:</strong> {{ usuario.direccion }}</p>
-            <p><strong>Ubicación:</strong> {{ usuario.departamento }}, {{ usuario.provincia }}, {{ usuario.distrito }}</p>
-            <p><strong>Referencia:</strong> {{ usuario.referencia }}</p>
-            <p><strong>Rol:</strong> {{ usuario.role | uppercase }}</p>
+            <p><strong>Nombre:</strong> {{ usuario.nombre }} {{ usuario.apellido }}</p>
+            <p><strong>Email:</strong> {{ usuario.correoElectronico }}</p>
+            <p><strong>Rol:</strong> {{ usuario.nombreRol | uppercase }}</p>
         </div>
     </div>
 
@@ -38,12 +34,13 @@
         </thead>
         <tbody>
             <tr *ngFor="let pedido of pedidos">
-                <td>{{ pedido.id }}</td>
-                <td>{{ pedido.fecha }}</td>
+                <td>{{ pedido.pedidoId }}</td>
+                <td>{{ pedido.fechaPedido | date:'yyyy-MM-dd' }}</td>
                 <td>S/ {{ pedido.total.toFixed(2) }}</td>
-                <td>{{ pedido.estado }}</td>
+                <td>{{ getEstadoNombre(pedido.estadoId) }}</td>
                 <td>
-                    <a [href]="pedido.urlFactura" target="_blank" class="btn btn-primary btn-sm">📄 Ver Factura</a>
+                    <a *ngIf="pedido.facturaUrl" [href]="getFacturaUrl(pedido)" target="_blank" class="btn btn-primary btn-sm">📄 Ver Factura</a>
+                    <span *ngIf="!pedido.facturaUrl" class="text-muted">No disponible</span>
                 </td>
             </tr>
         </tbody>

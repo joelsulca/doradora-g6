@@ -1,9 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Usuario } from '../../clasess/usuario';
+import { UsuarioLogin } from '../../shared/interfaces/usuario-login.interface';
+import { PedidoService } from '../../shared/services/pedido.service';
+import { Pedido } from '../../shared/interfaces/pedido.interface';
+
+const ESTADOS_MAP: Record<number, string> = {
+  1: 'Pendiente',
+  2: 'Enviado',
+  3: 'Entregado',
+  4: 'Cancelado',
+  // Agrega más estados según tu lógica de negocio
+};
 
 @Component({
   selector: 'app-perfil',
@@ -13,15 +22,16 @@ import { Usuario } from '../../clasess/usuario';
   imports: [CommonModule, ReactiveFormsModule],
 })
 export class PerfilComponent implements OnInit {
-  usuario: Usuario | null = null;
-  pedidos: any[] = [];
+  usuario: UsuarioLogin | null = null;
+  pedidos: Pedido[] = [];
+  estadosMap = ESTADOS_MAP;
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private pedidoService: PedidoService) {}
 
   ngOnInit() {
     const userData = localStorage.getItem('user');
     if (!userData) {
-      this.router.navigate(['/login']); // Si no hay usuario logueado, redirigir al login
+      this.router.navigate(['/login']);
     } else {
       this.usuario = JSON.parse(userData);
       this.cargarPedidos();
@@ -29,23 +39,27 @@ export class PerfilComponent implements OnInit {
   }
 
   cargarPedidos() {
-    this.http.get<any[]>('/json/pedidos.json').subscribe(data => {
-      this.pedidos = data
-        .filter(pedido => pedido.usuario === this.usuario?.username)
-        .map(pedido => ({
-          ...pedido,
-          factura: this.generarNumeroFactura(pedido.id),
-          urlFactura: this.generarLinkFactura(pedido.id),
-        }));
+    if (!this.usuario) return;
+    this.pedidoService.listarPedidosPorUsuario(this.usuario.usuarioId).subscribe({
+      next: (response) => {
+        if (response.success && Array.isArray(response.data)) {
+          this.pedidos = response.data;
+        } else {
+          this.pedidos = [];
+        }
+      },
+      error: () => {
+        this.pedidos = [];
+      }
     });
   }
 
-  generarNumeroFactura(idPedido: number): string {
-    return `FAC-${idPedido.toString().padStart(6, '0')}`;
+  getEstadoNombre(estadoId: number): string {
+    return this.estadosMap[estadoId] || 'Desconocido';
   }
 
-  generarLinkFactura(idPedido: number): string {
-    return `/facturas/factura_${idPedido}.pdf`; // Ruta simulada para el PDF
+  getFacturaUrl(pedido: Pedido): string {
+    return pedido.facturaUrl || '#';
   }
 
   cerrarSesion() {

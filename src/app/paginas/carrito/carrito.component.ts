@@ -36,8 +36,8 @@ export class CarritoComponent {
     }
   }
 
-  eliminarDelCarrito(id: number) {
-    this.carrito = this.carrito.filter(producto => producto.id !== id);
+  eliminarDelCarrito(productoId: number) {
+    this.carrito = this.carrito.filter(producto => producto.productoId !== productoId);
     localStorage.setItem('carrito', JSON.stringify(this.carrito));
   }
 

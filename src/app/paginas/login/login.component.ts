@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../shared/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -14,33 +15,68 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage = '';
+  captchaPregunta = '';
+  captchaRespuesta = '';
+  captchaCorrecto = false;
+  private captchaValor = 0;
 
-  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) {
+  constructor(
+    private fb: FormBuilder, 
+    private router: Router, 
+    private authService: AuthService,
+    private toastr: ToastrService
+  ) {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+      captcha: ['', Validators.required]
     });
+    this.generarCaptcha();
   }
+
   ngOnInit() {
-    // Si ya hay un usuario logueado, redirigir al perfil
     if (localStorage.getItem('user')) {
       this.router.navigate(['/perfil']);
     }
   }
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      this.http.get<any[]>('json/user.json').subscribe(users => {
-        const user = users.find(u =>
-          u.username === this.loginForm.value.username &&
-          u.password === this.loginForm.value.password
-        );
+  generarCaptcha() {
+    const a = Math.floor(Math.random() * 10) + 1;
+    const b = Math.floor(Math.random() * 10) + 1;
+    this.captchaValor = a + b;
+    this.captchaPregunta = `¿Cuánto es ${a} + ${b}?`;
+    this.captchaRespuesta = '';
+    this.captchaCorrecto = false;
+    this.loginForm.get('captcha')?.reset();
+  }
 
-        if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.router.navigate(['/perfil']);
-        } else {
-          this.errorMessage = "Usuario o contraseña incorrectos.";
+  validarCaptcha() {
+    this.captchaCorrecto = Number(this.loginForm.value.captcha) === this.captchaValor;
+  }
+
+  onSubmit() {
+    this.errorMessage = '';
+    this.validarCaptcha();
+    if (!this.captchaCorrecto) {
+      this.errorMessage = 'Captcha incorrecto. Inténtalo de nuevo.';
+      this.generarCaptcha();
+      return;
+    }
+    if (this.loginForm.valid) {
+      const { username, password } = this.loginForm.value;
+      this.authService.login(username, password).subscribe({
+        next: (response) => {
+          if (response.success) {
+            localStorage.setItem('user', JSON.stringify(response.data));
+            this.router.navigate(['/perfil']);
+          } else {
+            this.errorMessage = response.mensaje || 'Usuario o contraseña incorrectos.';
+            this.generarCaptcha();
+          }
+        },
+        error: () => {
+          this.errorMessage = 'Usuario o contraseña incorrectos.';
+          this.generarCaptcha();
         }
       });
     }
@@ -49,19 +85,10 @@ export class LoginComponent implements OnInit {
   forgotPassword() {
     const username = this.loginForm.value.username;
     if (!username) {
-      alert("Ingrese su usuario para recuperar la contraseña.");
+      this.toastr.warning('Ingrese su correo electrónico para recuperar la contraseña.', 'Atención');
       return;
     }
-
-    this.http.get<any[]>('json/user.json').subscribe(users => {
-      const user = users.find(u => u.username === username);
-
-      if (user) {
-        alert(`Se ha enviado un enlace de recuperación al correo: ${user.email}`);
-      } else {
-        alert("Usuario no encontrado.");
-      }
-    });
+    this.toastr.info('Función de recuperación de contraseña en desarrollo.', 'Información');
   }
 
   toggleAuthMode() {

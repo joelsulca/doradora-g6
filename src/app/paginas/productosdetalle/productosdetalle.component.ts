@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { Producto } from '../../clasess/producto';
+import { Producto } from '../../shared/interfaces/producto.interface';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProductoService } from '../../shared/services/producto.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-productosdetalle',
@@ -15,40 +16,46 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class ProductosdetalleComponent {
   producto: Producto | undefined;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private productoService: ProductoService,
+    private toastr: ToastrService
+  ) {
     this.cargarProducto();
   }
 
   cargarProducto() {
-    const id = Number(this.route.snapshot.paramMap.get('id')); // Obtener el ID de la URL
-
-    this.http.get<Producto[]>('json/productos.json').subscribe(data => {
-      this.producto = data.find(p => p.id === id);
-      console.log(this.producto);
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    if (!id) return;
+    this.productoService.obtenerProductoPorId(id).subscribe({
+      next: (response) => {
+        if (response.data) {
+          this.producto = response.data;
+        } else {
+          this.producto = undefined;
+        }
+      },
+      error: () => {
+        this.producto = undefined;
+      }
     });
   }
 
   agregarAlCarrito() {
-    if (!this.producto) return;
-  
+    if (!this.producto) {
+      return;
+    }
+
     let carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-  
-    // Buscar si el producto ya está en el carrito
-    let productoExistente = carrito.find((p: any) => p.id === this.producto?.id);
-  
+    let productoExistente = carrito.find((p: any) => p.productoId === this.producto?.productoId);
     if (productoExistente) {
-      // Si el producto ya está en el carrito, incrementar la cantidad
       productoExistente.cantidad += 1;
     } else {
-      // Si no existe, agregarlo con cantidad 1
       carrito.push({ ...this.producto, cantidad: 1 });
     }
-  
-    // Guardar el carrito actualizado en localStorage
     localStorage.setItem('carrito', JSON.stringify(carrito));
-  
-    alert('Producto agregado al carrito');
-    this.router.navigate(['/carrito']); // Redirige a la página del carrito
+    this.toastr.success('Producto agregado al carrito', 'Éxito');
+    this.router.navigate(['/carrito']);
   }
-  
 }

@@ -8,10 +8,12 @@
             <div class="card shadow">
                 <div class="card-body">
                     <form [formGroup]="registroForm" (ngSubmit)="registrarUsuario()">
+                        <div *ngIf="mensaje" class="alert alert-success text-center">{{ mensaje }}</div>
+                        <div *ngIf="error" class="alert alert-danger text-center">{{ error }}</div>
                         <div class="row">
                             <!-- Columna 1 -->
                             <div class="col-md-6">
-                                <div class="mb-3">
+                                <!-- <div class="mb-3">
                                     <label class="form-label">Usuario:</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -20,29 +22,7 @@
                                     </div>
                                     <div *ngIf="campoInvalido('username')" class="text-danger">El usuario debe tener al
                                         menos 4 caracteres.</div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Contraseña:</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                        <input type="password" class="form-control" formControlName="password"
-                                            placeholder="Ingrese su contraseña">
-                                    </div>
-                                    <div *ngIf="campoInvalido('password')" class="text-danger">La contraseña debe tener
-                                        al menos 6 caracteres.</div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Email:</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                        <input type="email" class="form-control" formControlName="email"
-                                            placeholder="Ingrese su correo">
-                                    </div>
-                                    <div *ngIf="campoInvalido('email')" class="text-danger">Debe ingresar un correo
-                                        válido.</div>
-                                </div>
+                                </div> -->
 
                                 <div class="mb-3">
                                     <label class="form-label">Nombres:</label>
@@ -58,6 +38,20 @@
                                         placeholder="Ingrese su apellido">
                                     <div *ngIf="campoInvalido('apellidos')" class="text-danger">Este campo es
                                         obligatorio.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Teléfono:</label>
+                                    <input type="text" class="form-control" formControlName="telefono"
+                                        placeholder="Ingrese su teléfono">
+                                    <div *ngIf="campoInvalido('telefono')" class="text-danger">Debe ingresar un teléfono válido de 9 dígitos.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Fecha de Nacimiento:</label>
+                                    <input type="date" class="form-control" formControlName="fechaNacimiento"
+                                        placeholder="Ingrese su fecha de nacimiento">
+                                    <div *ngIf="campoInvalido('fechaNacimiento')" class="text-danger">Este campo es obligatorio.</div>
                                 </div>
                             </div>
 
@@ -94,9 +88,41 @@
                                     <input type="text" class="form-control" formControlName="referencia"
                                         placeholder="Referencia (opcional)">
                                 </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Email:</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                        <input type="email" class="form-control" formControlName="email"
+                                            placeholder="Ingrese su correo">
+                                    </div>
+                                    <div *ngIf="campoInvalido('email')" class="text-danger">Debe ingresar un correo
+                                        válido.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Contraseña:</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" formControlName="password"
+                                            placeholder="Ingrese su contraseña">
+                                    </div>
+                                    <div *ngIf="campoInvalido('password')" class="text-danger">La contraseña debe tener
+                                        al menos 6 caracteres.</div>
+                                </div>
                             </div>
                         </div>
 
+                        <!-- Checkbox de Términos y Condiciones -->
+                        <div class="form-check mb-3 text-center">
+                            <input class="form-check-input" type="checkbox" id="aceptaTerminos" formControlName="aceptaTerminos">
+                            <label class="form-check-label" for="aceptaTerminos">
+                                Acepto los <a href="#" target="_blank">términos y condiciones</a>
+                            </label>
+                            <div *ngIf="campoInvalido('aceptaTerminos')" class="text-danger">
+                                Debe aceptar los términos y condiciones para registrarse.
+                            </div>
+                        </div>
                         <!-- Botón de Registro -->
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary w-100"

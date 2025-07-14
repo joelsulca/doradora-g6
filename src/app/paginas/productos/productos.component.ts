@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Producto } from '../../clasess/producto';
-
+import { Producto } from '../../shared/interfaces/producto.interface';
+import { ProductoService } from '../../shared/services/producto.service';
 
 @Component({
   selector: 'app-productos',
@@ -13,22 +12,34 @@ import { Producto } from '../../clasess/producto';
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.css'
 })
-
 export class ProductosComponent {
+  productos: Producto[] = [];
 
-  productos: Producto[] = []; // Esto almacena la lista de productos
-
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private productoService: ProductoService, private router: Router) {
     this.cargarProductos();
   }
 
   cargarProductos() {
-    this.http.get<Producto[]>('/json/productos.json').subscribe(data => {
-      this.productos = data;
+    this.productoService.listarProductos().subscribe({
+      next: (response) => {
+        if (response.statusCode === 200 && Array.isArray(response.data)) {
+          this.productos = response.data;
+        } else {
+          this.productos = [];
+        }
+      },
+      error: (err) => {
+        this.productos = [];
+      }
     });
   }
 
+  getImagenUrl(url: string): string {
+    if (!url) return '';
+    return url.startsWith('/') ? url : '/' + url;
+  }
+
   verDetalle(producto: Producto) {
-    this.router.navigate(['/producto', producto.id]);
+    this.router.navigate(['/producto', producto.productoId]);
   }
 }

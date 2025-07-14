@@ -1,0 +1,11 @@
+{
+  "/api": {
+    "target": "https://bm2d19ra7b.execute-api.us-east-1.amazonaws.com/v1",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "logLevel": "debug"
+  }
+} 

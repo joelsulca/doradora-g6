@@ -19,7 +19,7 @@ export class CarritoComponent {
   }
 
   verificarSesion() {
-    this.usuarioLogueado = !!localStorage.getItem('user'); // Si existe, es true
+    this.usuarioLogueado = !!localStorage.getItem('user');
   }
   cargarCarrito() {
     this.carrito = JSON.parse(localStorage.getItem('carrito') || '[]');

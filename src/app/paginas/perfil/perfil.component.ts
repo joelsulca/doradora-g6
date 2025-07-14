@@ -11,7 +11,6 @@ const ESTADOS_MAP: Record<number, string> = {
   2: 'Enviado',
   3: 'Entregado',
   4: 'Cancelado',
-  // Agrega más estados según tu lógica de negocio
 };
 
 @Component({

@@ -9,5 +9,4 @@ export interface PedidoCrearPayload {
     cantidad: number;
     precio: number;
   }>;
-  // Agrega aquí otros campos requeridos por la API, como fechaEntrega, etc.
 } 

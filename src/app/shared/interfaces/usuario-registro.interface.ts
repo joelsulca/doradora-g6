@@ -4,7 +4,7 @@ export interface UsuarioRegistroPayload {
   correoElectronico: string;
   password: string;
   telefono: string;
-  fechaNacimiento: string; // formato: YYYY-MM-DD
+  fechaNacimiento: string;
   activo: boolean;
   correoConfirmado: boolean;
   rolId: number;

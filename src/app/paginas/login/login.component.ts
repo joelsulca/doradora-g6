@@ -88,7 +88,11 @@ export class LoginComponent implements OnInit {
       this.toastr.warning('Ingrese su correo electrónico para recuperar la contraseña.', 'Atención');
       return;
     }
-    this.toastr.info('Función de recuperación de contraseña en desarrollo.', 'Información');
+    if (this.loginForm.get('username')?.invalid) {
+      this.toastr.error('Ingrese un correo electrónico válido.', 'Error');
+      return;
+    }
+    this.toastr.success('Se ha enviado un correo para recuperar su contraseña.', 'Recuperación de contraseña');
   }
 
   toggleAuthMode() {

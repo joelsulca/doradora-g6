@@ -13,19 +13,8 @@
                         <div class="row">
                             <!-- Columna 1 -->
                             <div class="col-md-6">
-                                <!-- <div class="mb-3">
-                                    <label class="form-label">Usuario:</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                        <input type="text" class="form-control" formControlName="username"
-                                            placeholder="Ingrese su usuario">
-                                    </div>
-                                    <div *ngIf="campoInvalido('username')" class="text-danger">El usuario debe tener al
-                                        menos 4 caracteres.</div>
-                                </div> -->
-
                                 <div class="mb-3">
-                                    <label class="form-label">Nombres:</label>
+                                    <label class="form-label">Nombres(*):</label>
                                     <input type="text" class="form-control" formControlName="nombres"
                                         placeholder="Ingrese su nombre">
                                     <div *ngIf="campoInvalido('nombres')" class="text-danger">Este campo es obligatorio.
@@ -33,7 +22,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Apellidos:</label>
+                                    <label class="form-label">Apellidos(*):</label>
                                     <input type="text" class="form-control" formControlName="apellidos"
                                         placeholder="Ingrese su apellido">
                                     <div *ngIf="campoInvalido('apellidos')" class="text-danger">Este campo es
@@ -41,14 +30,14 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Teléfono:</label>
+                                    <label class="form-label">Teléfono(*):</label>
                                     <input type="text" class="form-control" formControlName="telefono"
                                         placeholder="Ingrese su teléfono">
                                     <div *ngIf="campoInvalido('telefono')" class="text-danger">Debe ingresar un teléfono válido de 9 dígitos.</div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Fecha de Nacimiento:</label>
+                                    <label class="form-label">Fecha de Nacimiento(*):</label>
                                     <input type="date" class="form-control" formControlName="fechaNacimiento"
                                         placeholder="Ingrese su fecha de nacimiento">
                                     <div *ngIf="campoInvalido('fechaNacimiento')" class="text-danger">Este campo es obligatorio.</div>
@@ -58,7 +47,7 @@
                             <!-- Columna 2 -->
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label">Dirección:</label>
+                                    <label class="form-label">Dirección:(*)</label>
                                     <input type="text" class="form-control" formControlName="direccion"
                                         placeholder="Ingrese su dirección">
                                     <div *ngIf="campoInvalido('direccion')" class="text-danger">Este campo es
@@ -66,7 +55,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Departamento:</label>
+                                    <label class="form-label">Departamento:(*)</label>
                                     <select class="form-select" formControlName="departamento">
                                         <option *ngFor="let dep of departamentos" [value]="dep">{{ dep }}</option>
                                     </select>
@@ -75,7 +64,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Distrito:</label>
+                                    <label class="form-label">Distrito:(*)</label>
                                     <select class="form-select" formControlName="distrito">
                                         <option *ngFor="let dist of distritos" [value]="dist">{{ dist }}</option>
                                     </select>
@@ -90,7 +79,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Email:</label>
+                                    <label class="form-label">Email:(*)</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                                         <input type="email" class="form-control" formControlName="email"
@@ -101,7 +90,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Contraseña:</label>
+                                    <label class="form-label">Contraseña:(*)</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-lock"></i></span>
                                         <input type="password" class="form-control" formControlName="password"

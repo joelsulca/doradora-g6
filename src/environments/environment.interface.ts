@@ -3,8 +3,4 @@ export interface Environment {
   apiUrl: string;
   debug: boolean;
   logLevel: 'debug' | 'info' | 'warn' | 'error';
-  // Agregar más variables según sea necesario
-  // version: string;
-  // appName: string;
-  // timeout: number;
 } 
